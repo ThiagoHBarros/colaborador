@@ -1,0 +1,45 @@
+<ion-content color="dark">
+  <div class="d-flex justify-content-center">
+    <h1>COLABORADOR</h1>
+  </div>
+  <div class="formulario">
+    <form [formGroup]="formulario">
+      <ion-input [clearInput]="true" label="Nome" formControlName="nome" label-placement="floating"
+        fill="outline"></ion-input>
+      <ion-input [clearInput]="true" type="number" formControlName="idade" min="0" label="Idade"
+        label-placement="floating" fill="outline"></ion-input>
+      <ion-select label-placement="floating" label="Sexo" fill="outline" formControlName="sexo">
+        <ion-select-option value="F">Feminino</ion-select-option>
+        <ion-select-option value="M">Masculino</ion-select-option>
+      </ion-select>
+      <ion-input [clearInput]="true" label="E-mail" label-placement="floating" fill="outline"
+        formControlName="email"></ion-input>
+
+      <ion-input [clearInput]="true" label="Celular" label-placement="floating" fill="outline" formControlName="celular"
+        [maskito]="celularMascara" [maskitoElement]="maskPredicate"></ion-input>
+
+      <ion-input [clearInput]="true" label="Endereço" label-placement="floating" fill="outline"
+        formControlName="endereco"></ion-input>
+
+      <ion-textarea label="Descrição" labelPlacement="floating" fill="outline"
+        formControlName="descricao"></ion-textarea>
+
+      <ion-checkbox labelPlacement="end" formControlName="equipe"><b>Possui Equipe?</b></ion-checkbox>
+
+      <ion-input *ngIf="campoEquipe" [clearInput]="true" formControlName="nomeEquipe" label="Equipe"
+        label-placement="floating" fill="outline"></ion-input>
+    </form>
+  </div>
+
+  <div class="d-flex justify-content-center mt-5">
+    <ion-button (click)="limparForm()" color="light">
+      Limpar
+      <ion-icon slot="end" name="trash"></ion-icon>
+    </ion-button>
+
+    <ion-button [disabled]="!formulario.valid" color="light" (click)="salvarColaborador()">
+      Salvar
+      <ion-icon slot="end" name="save"></ion-icon>
+    </ion-button>
+  </div>
+</ion-content>
