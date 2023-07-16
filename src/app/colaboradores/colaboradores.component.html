@@ -1,8 +1,12 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="d-flex">
+    <ion-icon name="chevron-back-sharp" class="icone-home" [routerLink]="['']"></ion-icon>    
+    <ion-title>Colaboradores</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
 <ion-content color="dark">
-  <div class="d-flex justify-content-center">
-    <h1>COLABORADORES</h1>
-  </div>
-
   <div class="d-flex justify-content-center" *ngIf="semColaboradoes">
     <h1>
       Não existe colaboradores cadastrados
@@ -14,17 +18,17 @@
     <ion-card>
       <img [src]="colaborador.imagem" width="500px" />
       <ion-card-header>
-        <ion-card-title>{{colaborador.nome}}</ion-card-title>
+        <ion-card-title>{{colaborador.nome}}, {{colaborador.idade}}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        E-mail: {{colaborador.email}}
-        <br>Celular: {{colaborador.celular}}
-        <br>Descrição: {{colaborador.descricao}}
-        <br>Endereço: {{colaborador.endereco}}
-        <br>Idade: {{colaborador.idade}}
+        Cargo: {{cargosEnumExibicao[colaborador.cargo || 0 ]}}
+        <br>E-mail: {{colaborador.email}}
+        <br>Celular: {{colaborador.celular}}       
         <br>Sexo: {{colaborador.sexo == 'M' ? 'Masculino' : 'Feminino'}}
-        <a *ngIf="colaborador.equipe"><br> Nome da Equipe: {{colaborador.nomeEquipe}}</a>
+        <br>Endereço: {{colaborador.endereco}}                
+        <br>Descrição: {{colaborador.descricao}}
+        <a *ngIf="colaborador.equipe"><br> Nome da Equipe: {{ equipeEnumExibicao[colaborador.nomeEquipe || 0]}}</a>
       </ion-card-content>
     </ion-card>
   </div>

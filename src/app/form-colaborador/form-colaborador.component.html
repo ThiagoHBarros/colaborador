@@ -1,20 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="d-flex">
+      <ion-icon name="chevron-back-sharp" class="icone-home" [routerLink]="['']"></ion-icon>
+      <ion-title>Cadastrar Colaborador</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
 <ion-content color="dark">
-  <div class="d-flex justify-content-center">
-    <h1>COLABORADOR</h1>
-  </div>
   <div class="formulario">
     <form [formGroup]="formulario">
       <ion-input [clearInput]="true" label="Nome" formControlName="nome" label-placement="floating"
         fill="outline"></ion-input>
-        
+
       <ion-input [clearInput]="true" type="number" formControlName="idade" min="0" label="Idade"
         label-placement="floating" fill="outline"></ion-input>
+
+      <ion-select label-placement="floating" label="Cargo" fill="outline" [(ngModel)]="cargoSelecionado"
+        formControlName="cargo">
+        <ion-select-option *ngFor="let cargo of cargosEnumOpcoes" [value]="cargo">
+          {{ cargosEnumExibicao[cargo]}}
+        </ion-select-option>
+      </ion-select>
 
       <ion-select label-placement="floating" label="Sexo" fill="outline" formControlName="sexo">
         <ion-select-option value="F">Feminino</ion-select-option>
         <ion-select-option value="M">Masculino</ion-select-option>
       </ion-select>
-      
+
       <ion-input [clearInput]="true" label="E-mail" label-placement="floating" fill="outline"
         formControlName="email"></ion-input>
 
@@ -29,8 +41,11 @@
 
       <ion-checkbox labelPlacement="end" formControlName="equipe"><b>Possui Equipe?</b></ion-checkbox>
 
-      <ion-input *ngIf="campoEquipe" [clearInput]="true" formControlName="nomeEquipe" label="Equipe"
-        label-placement="floating" fill="outline"></ion-input>
+      <ion-select *ngIf="campoEquipe" label-placement="floating" label="Equipe" fill="outline"
+        formControlName="nomeEquipe">
+        <ion-select-option *ngFor="let equipe of equipeEnum" [value]="equipe">{{ equipeEnumExibicao[equipe] }}</ion-select-option>
+      </ion-select>
+
     </form>
   </div>
 

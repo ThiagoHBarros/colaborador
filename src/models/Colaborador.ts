@@ -1,3 +1,5 @@
+import { CargosEnums, EquipesEnum } from "./Enums";
+
 export class Colaborador {
     nome?: string;
     email?: string;
@@ -7,6 +9,7 @@ export class Colaborador {
     idade?: string;
     sexo?: string;
     equipe?: boolean;
-    nomeEquipe?: string;
+    nomeEquipe?: EquipesEnum;
     imagem?: string;
+    cargo?: CargosEnums;
 }
