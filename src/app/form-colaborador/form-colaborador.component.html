@@ -1,7 +1,12 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="d-flex">
+    <ion-icon name="chevron-back-sharp" class="icone-home" [routerLink]="['']"></ion-icon>    
+    <ion-title>Cadastrar Colaborador</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
 <ion-content color="dark">
-  <div class="d-flex justify-content-center">
-    <h1>COLABORADOR</h1>
-  </div>
   <div class="formulario">
     <form [formGroup]="formulario">
       <ion-input [clearInput]="true" label="Nome" formControlName="nome" label-placement="floating"

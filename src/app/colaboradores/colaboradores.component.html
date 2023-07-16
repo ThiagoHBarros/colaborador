@@ -1,8 +1,12 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="d-flex">
+    <ion-icon name="chevron-back-sharp" class="icone-home" [routerLink]="['']"></ion-icon>    
+    <ion-title>Colaboradores</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
 <ion-content color="dark">
-  <div class="d-flex justify-content-center">
-    <h1>COLABORADORES</h1>
-  </div>
-
   <div class="d-flex justify-content-center" *ngIf="semColaboradoes">
     <h1>
       Não existe colaboradores cadastrados
