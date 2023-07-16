@@ -11,8 +11,20 @@ export class FormColaboradorComponent  implements OnInit {
 
   colaboradores: any[] = [];    
   campoEquipe: boolean = false;
-  avatarMasculino = '../../assets/avatar/avatarmasculino.jpg'  
-  avatarFeminino = '../../assets/avatar/avatarfeminino.jpg'
+
+  imagemM: string[] = [    
+    "../../assets/avatar/homem1.png",
+    "../../assets/avatar/homem2.png",
+    "../../assets/avatar/homem3.png",
+    "../../assets/avatar/homem4.png",
+  ]
+
+  imagemF: string[] = [    
+    "../../assets/avatar/mulher1.png",
+    "../../assets/avatar/mulher2.png",
+    "../../assets/avatar/mulher3.png",
+    "../../assets/avatar/mulher4.png",
+  ]
 
 
   formulario = this._fb.group({
@@ -54,11 +66,13 @@ export class FormColaboradorComponent  implements OnInit {
 
   definirImagemColaborador(): void {
     const sexo = this.formulario.get('sexo')?.value;
-
-    if (sexo == 'F') {
-      this.formulario.get('imagem')?.setValue(this.avatarFeminino);      
+    const imagemM = this.imagemM[Math.floor(Math.random() * this.imagemM.length)];
+    const imagemF = this.imagemF[Math.floor(Math.random() * this.imagemF.length)];    
+    
+    if (sexo == 'F') {      
+      this.formulario.get('imagem')?.setValue(imagemF);      
     } else {
-      this.formulario.get('imagem')?.setValue(this.avatarMasculino);      
+      this.formulario.get('imagem')?.setValue(imagemM);      
     }
   }  
 
