@@ -11,6 +11,9 @@ export class FormColaboradorComponent  implements OnInit {
 
   colaboradores: any[] = [];    
   campoEquipe: boolean = false;
+  avatarMasculino = '../../assets/avatar/avatarmasculino.jpg'  
+  avatarFeminino = '../../assets/avatar/avatarfeminino.jpg'
+
 
   formulario = this._fb.group({
     nome: ['', Validators.required],
@@ -21,7 +24,8 @@ export class FormColaboradorComponent  implements OnInit {
     idade: ['', Validators.required],
     sexo: ['', Validators.required],  
     equipe: [false],
-    nomeEquipe: ['']
+    nomeEquipe: [''],
+    imagem: ['']
   });
 
   readonly celularMascara: MaskitoOptions = {
@@ -48,9 +52,21 @@ export class FormColaboradorComponent  implements OnInit {
         });
   }
 
-  salvarColaborador(): void {
-    let colaborador = this.formulario.getRawValue();        
+  definirImagemColaborador(): void {
+    const sexo = this.formulario.get('sexo')?.value;
 
+    if (sexo == 'F') {
+      this.formulario.get('imagem')?.setValue(this.avatarFeminino);      
+    } else {
+      this.formulario.get('imagem')?.setValue(this.avatarMasculino);      
+    }
+  }  
+
+  salvarColaborador(): void {
+    this.definirImagemColaborador();
+
+    let colaborador;  
+    colaborador = this.formulario.getRawValue();        
     this.colaboradores.push(colaborador);
     
     sessionStorage.setItem('colaboradores',  JSON.stringify(this.colaboradores));
@@ -60,6 +76,6 @@ export class FormColaboradorComponent  implements OnInit {
   limparForm(): void {
     this.formulario.reset();
   }
-  
+
   readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
 }

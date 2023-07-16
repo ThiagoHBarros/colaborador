@@ -1,3 +1,31 @@
-<p>
-  colaboradores works!
-</p>
+<ion-content color="dark">
+  <div class="d-flex justify-content-center">
+    <h1>COLABORADORES</h1>
+  </div>
+
+  <div class="d-flex justify-content-center" *ngIf="semColaboradoes">
+    <h1>
+      Não existe colaboradores cadastrados
+      <ion-icon name="person-circle-sharp"></ion-icon>
+    </h1>
+  </div>
+
+  <div class="card-colaborador" *ngFor="let colaborador of colaboradores">
+    <ion-card>
+      <img [src]="colaborador.imagem" width="500px" />
+      <ion-card-header>
+        <ion-card-title>{{colaborador.nome}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        E-mail: {{colaborador.email}}
+        <br>Celular: {{colaborador.celular}}
+        <br>Descrição: {{colaborador.descricao}}
+        <br>Endereço: {{colaborador.endereco}}
+        <br>Idade: {{colaborador.idade}}
+        <br>Sexo: {{colaborador.sexo == 'M' ? 'Masculino' : 'Feminino'}}
+        <a *ngIf="colaborador.equipe"><br> Nome da Equipe: {{colaborador.nomeEquipe}}</a>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
