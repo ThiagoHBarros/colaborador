@@ -6,12 +6,15 @@
     <form [formGroup]="formulario">
       <ion-input [clearInput]="true" label="Nome" formControlName="nome" label-placement="floating"
         fill="outline"></ion-input>
+        
       <ion-input [clearInput]="true" type="number" formControlName="idade" min="0" label="Idade"
         label-placement="floating" fill="outline"></ion-input>
+
       <ion-select label-placement="floating" label="Sexo" fill="outline" formControlName="sexo">
         <ion-select-option value="F">Feminino</ion-select-option>
         <ion-select-option value="M">Masculino</ion-select-option>
       </ion-select>
+      
       <ion-input [clearInput]="true" label="E-mail" label-placement="floating" fill="outline"
         formControlName="email"></ion-input>
 

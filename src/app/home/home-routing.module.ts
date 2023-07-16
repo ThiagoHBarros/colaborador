@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home.page';
 import { FormColaboradorComponent } from '../form-colaborador/form-colaborador.component';
+import { ColaboradoresComponent } from '../colaboradores/colaboradores.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'cadastro',
     component: FormColaboradorComponent,
+  },
+  {
+    path: 'colaboradores',
+    component: ColaboradoresComponent,
   }
 ];
 

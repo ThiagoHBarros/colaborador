@@ -7,9 +7,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { FormColaboradorComponent } from '../form-colaborador/form-colaborador.component';
-
-
-
+import { ColaboradoresComponent } from '../colaboradores/colaboradores.component';
 
 @NgModule({
   imports: [
@@ -20,6 +18,7 @@ import { FormColaboradorComponent } from '../form-colaborador/form-colaborador.c
     HomePageRoutingModule,
     MaskitoModule,
   ],
-  declarations: [HomePage, FormColaboradorComponent]
+  declarations: [HomePage, FormColaboradorComponent, ColaboradoresComponent
+  ]
 })
 export class HomePageModule {}
