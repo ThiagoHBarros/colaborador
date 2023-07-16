@@ -8,6 +8,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { FormColaboradorComponent } from '../form-colaborador/form-colaborador.component';
 import { ColaboradoresComponent } from '../colaboradores/colaboradores.component';
+import { EquipesComponent } from '../equipes/equipes.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,11 @@ import { ColaboradoresComponent } from '../colaboradores/colaboradores.component
     HomePageRoutingModule,
     MaskitoModule,
   ],
-  declarations: [HomePage, FormColaboradorComponent, ColaboradoresComponent
+  declarations: [
+    HomePage, 
+    FormColaboradorComponent, 
+    ColaboradoresComponent,
+    EquipesComponent
   ]
 })
 export class HomePageModule {}

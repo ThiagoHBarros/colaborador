@@ -18,17 +18,17 @@
     <ion-card>
       <img [src]="colaborador.imagem" width="500px" />
       <ion-card-header>
-        <ion-card-title>{{colaborador.nome}}</ion-card-title>
+        <ion-card-title>{{colaborador.nome}}, {{colaborador.idade}}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        E-mail: {{colaborador.email}}
-        <br>Celular: {{colaborador.celular}}
-        <br>Descrição: {{colaborador.descricao}}
-        <br>Endereço: {{colaborador.endereco}}
-        <br>Idade: {{colaborador.idade}}
+        Cargo: {{cargosEnumExibicao[colaborador.cargo || 0 ]}}
+        <br>E-mail: {{colaborador.email}}
+        <br>Celular: {{colaborador.celular}}       
         <br>Sexo: {{colaborador.sexo == 'M' ? 'Masculino' : 'Feminino'}}
-        <a *ngIf="colaborador.equipe"><br> Nome da Equipe: {{colaborador.nomeEquipe}}</a>
+        <br>Endereço: {{colaborador.endereco}}                
+        <br>Descrição: {{colaborador.descricao}}
+        <a *ngIf="colaborador.equipe"><br> Nome da Equipe: {{ equipeEnumExibicao[colaborador.nomeEquipe || 0]}}</a>
       </ion-card-content>
     </ion-card>
   </div>

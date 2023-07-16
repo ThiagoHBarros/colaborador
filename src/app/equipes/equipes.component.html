@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="d-flex">
+      <ion-icon name="chevron-back-sharp" class="icone-home" [routerLink]="['']"></ion-icon>
+      <ion-title>Equipes</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="dark">
+  <div class="card-equipes">
+    <ion-list>
+      <ion-list-header>
+        <ion-label class="titulo-lista">{{ equipeEnumExibicao[0] }}</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let colaborador of colaboradoresAgileTech">
+        <ion-avatar slot="start">
+          <img [src]="colaborador.imagem" />
+        </ion-avatar>
+        <ion-label> {{colaborador.nome}} - <b>{{cargosEnumExibicao[colaborador.cargo || 0]}}</b></ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="card-equipes">
+    <ion-list>
+      <ion-list-header>
+        <ion-label class="titulo-lista">{{ equipeEnumExibicao[1] }}</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let colaborador of colaboradoresBrainTrust">
+        <ion-avatar slot="start">
+          <img [src]="colaborador.imagem" />
+        </ion-avatar>
+        <ion-label> {{colaborador.nome}} - <b>{{cargosEnumExibicao[colaborador.cargo || 0]}}</b></ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="card-equipes">
+    <ion-list>
+      <ion-list-header>
+        <ion-label class="titulo-lista">{{ equipeEnumExibicao[2] }}</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let colaborador of colaboradoresInovaTech">
+        <ion-avatar slot="start">
+          <img [src]="colaborador.imagem" />
+        </ion-avatar>
+        <ion-label> {{colaborador.nome}} - <b>{{cargosEnumExibicao[colaborador.cargo || 0]}}</b></ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="card-equipes">
+    <ion-list>
+      <ion-list-header>
+        <ion-label class="titulo-lista">{{ equipeEnumExibicao[3] }}</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let colaborador of colaboradoresPowerSolutions">
+        <ion-avatar slot="start">
+          <img [src]="colaborador.imagem" />
+        </ion-avatar>
+        <ion-label> {{colaborador.nome}} - <b>{{cargosEnumExibicao[colaborador.cargo || 0]}}</b></ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="card-equipes">
+    <ion-list>
+      <ion-list-header>
+        <ion-label class="titulo-lista">Sem Equipe</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let colaborador of colaboradoresSemEquipe">
+        <ion-avatar slot="start">
+          <img [src]="colaborador.imagem" />
+        </ion-avatar>
+        <ion-label> {{colaborador.nome}} - <b>{{cargosEnumExibicao[colaborador.cargo || 0]}}</b></ion-label>
+      </ion-item>
+    </ion-list>
+  </div>  
+</ion-content>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Colaborador } from 'src/models/Colaborador';
+import { CargosEnumsExibicao, EquipesEnumExibicao } from 'src/models/Enums';
 
 @Component({
   selector: 'app-colaboradores',
@@ -10,6 +11,20 @@ export class ColaboradoresComponent  implements OnInit {
 
   colaboradores?: Colaborador[];
   semColaboradoes: boolean = false;
+
+  cargosEnumExibicao: CargosEnumsExibicao[] = [
+    CargosEnumsExibicao.AdministradorRedes, 
+    CargosEnumsExibicao.DesenvolvedorSoftware, 
+    CargosEnumsExibicao.EngenheiroSoftware, 
+    CargosEnumsExibicao.GerenteProjeto
+  ]
+
+  equipeEnumExibicao: EquipesEnumExibicao[] = [
+    EquipesEnumExibicao.AgileTech,
+    EquipesEnumExibicao.BrainTrust,
+    EquipesEnumExibicao.InovaTech,
+    EquipesEnumExibicao.PowerSolutions
+  ];
 
   constructor() { }
 
