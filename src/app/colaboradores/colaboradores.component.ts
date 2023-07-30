@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Colaborador } from 'src/models/Colaborador';
 import { CargosEnumsExibicao, EquipesEnumExibicao } from 'src/models/Enums';
 
@@ -11,6 +12,7 @@ export class ColaboradoresComponent  implements OnInit {
 
   colaboradores?: Colaborador[];
   semColaboradoes: boolean = false;
+  editado: boolean = false
 
   cargosEnumExibicao: CargosEnumsExibicao[] = [
     CargosEnumsExibicao.AdministradorRedes, 
@@ -26,9 +28,14 @@ export class ColaboradoresComponent  implements OnInit {
     EquipesEnumExibicao.PowerSolutions
   ];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { 
+    this.activatedRoute.params.subscribe(params => this.editado = params['editado']);
+  }
 
-  ngOnInit() {        
+  ngOnInit() {           
     if (sessionStorage.getItem('colaboradores') != null) {
       this.colaboradores = JSON.parse(sessionStorage.getItem('colaboradores') || '');      
       this.ordernarColaboradores();
@@ -53,5 +60,21 @@ export class ColaboradoresComponent  implements OnInit {
 
       return 0;
     });
+  }
+
+  editarColaborador(id: string): void {    
+    this.router.navigateByUrl(`/home/editar/${id}`);
+  }
+
+  deletarColaborador(id: any): void {      
+    this.colaboradores = this.colaboradores?.filter(x => x.id !== id);    
+    sessionStorage.removeItem('colaboradores');
+    sessionStorage.setItem('colaboradores', JSON.stringify(this.colaboradores));
+
+    this.recarregarColaboradores();
+  }
+
+  recarregarColaboradores(): void {
+    window.location.reload();
   }
 }
