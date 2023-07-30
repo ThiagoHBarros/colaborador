@@ -32,12 +32,14 @@ export class EquipesComponent  implements OnInit {
   
   constructor() { }
 
-  ngOnInit() {
-    this.verificarEquipes();
+  ngOnInit() {    
+    if(sessionStorage.getItem('colaboradores') != null){
+      this.verificarEquipes();
+    }    
   }
 
-  verificarEquipes(): void {
-    this.colaboradores = JSON.parse(sessionStorage.getItem('colaboradores') || '');
+  verificarEquipes(): void {        
+    this.colaboradores = JSON.parse(sessionStorage.getItem('colaboradores') || '');  
     this.colaboradoresAgileTech = this.ordernarColaboradores(this.colaboradores?.filter(x => x.nomeEquipe == EquipesEnum.AgileTech && x.equipe == true) || []);
     this.colaboradoresBrainTrust = this.ordernarColaboradores(this.colaboradores?.filter(x => x.nomeEquipe == EquipesEnum.BrainTrust) || []);
     this.colaboradoresInovaTech = this.ordernarColaboradores(this.colaboradores?.filter(x => x.nomeEquipe == EquipesEnum.InovaTech) || []);

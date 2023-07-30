@@ -3,6 +3,7 @@
     <div class="d-flex">
     <ion-icon name="chevron-back-sharp" class="icone-home" [routerLink]="['']"></ion-icon>    
     <ion-title>Colaboradores</ion-title>
+    <ion-icon name="refresh-sharp" class="icone-home" (click)="recarregarColaboradores()"></ion-icon>    
     </div>
   </ion-toolbar>
 </ion-header>
@@ -18,7 +19,13 @@
     <ion-card>
       <img [src]="colaborador.imagem" width="500px" />
       <ion-card-header>
-        <ion-card-title>{{colaborador.nome}}, {{colaborador.idade}}</ion-card-title>
+        <div class="d-flex justify-content-between">
+          <ion-card-title>{{colaborador.nome}}, {{colaborador.idade}}</ion-card-title>
+          <div>
+            <ion-icon name="create-outline" class="icone-editar" (click)="editarColaborador(colaborador.id)"></ion-icon>
+            <ion-icon name="trash-outline" class="icone-editar" (click)="deletarColaborador(colaborador.id)"></ion-icon>
+          </div>
+        </div>
       </ion-card-header>
 
       <ion-card-content>

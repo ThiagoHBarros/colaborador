@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <div class="d-flex">
-      <ion-icon name="chevron-back-sharp" class="icone-home" [routerLink]="['']"></ion-icon>
-      <ion-title>Cadastrar Colaborador</ion-title>
+      <ion-icon name="chevron-back-sharp" class="icone-home" [routerLink]="[rota]"></ion-icon>
+      <ion-title>{{tituloHeader}}</ion-title>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -52,10 +52,15 @@
   <div class="d-flex justify-content-center mt-5">
     <ion-button (click)="limparForm()" color="light">
       Limpar
-      <ion-icon slot="end" name="trash"></ion-icon>
+      <ion-icon slot="end" name="close"></ion-icon>
     </ion-button>
 
-    <ion-button [disabled]="!formulario.valid" color="light" (click)="salvarColaborador()">
+    <ion-button *ngIf="!editando" [disabled]="!formulario.valid" color="light" (click)="salvarColaborador()">
+      Salvar
+      <ion-icon slot="end" name="save"></ion-icon>
+    </ion-button>
+
+    <ion-button *ngIf="editando" [disabled]="!formulario.valid" color="light" (click)="editarColaborador()">
       Salvar
       <ion-icon slot="end" name="save"></ion-icon>
     </ion-button>

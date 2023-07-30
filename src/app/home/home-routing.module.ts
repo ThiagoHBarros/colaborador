@@ -15,6 +15,10 @@ const routes: Routes = [
     component: FormColaboradorComponent,
   },
   {
+    path: 'editar/:id',
+    component: FormColaboradorComponent,
+  },
+  {
     path: 'colaboradores',
     component: ColaboradoresComponent,
   },

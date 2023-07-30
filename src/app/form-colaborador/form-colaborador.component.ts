@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
+import { Colaborador } from 'src/models/Colaborador';
 import { CargosEnums, CargosEnumsExibicao, EquipesEnum, EquipesEnumExibicao } from 'src/models/Enums';
 
 @Component({
@@ -10,9 +12,13 @@ import { CargosEnums, CargosEnumsExibicao, EquipesEnum, EquipesEnumExibicao } fr
 })
 export class FormColaboradorComponent implements OnInit {
 
+  tituloHeader = 'Cadastrar Colaborador'
+  editando: boolean = false;
+  idColaborador = undefined;
   colaboradores: any[] = [];
   campoEquipe: boolean = false;
-  cargoSelecionado = CargosEnums;  
+  cargoSelecionado = CargosEnums;
+  rota = '';  
 
   cargosEnumOpcoes: CargosEnums[] = [
     CargosEnums.AdministradorRedes,
@@ -56,7 +62,6 @@ export class FormColaboradorComponent implements OnInit {
     "../../assets/avatar/mulher4.png",
   ]
 
-
   formulario = this._fb.group({
     nome: ['', Validators.required],
     email: ['', Validators.required],
@@ -68,18 +73,27 @@ export class FormColaboradorComponent implements OnInit {
     equipe: [false],
     nomeEquipe: [''],
     imagem: [''],
-    cargo: ['', Validators.required]
+    cargo: [0, Validators.required],
+    id: [''],
   });
 
-  readonly celularMascara: MaskitoOptions = {
-    mask: ['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
-  };
-
-  constructor(
+  constructor (
     private _fb: FormBuilder,
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private router: Router,    
+  )
+  {
+    this.activatedRoute.params.subscribe(params => this.idColaborador = params['id']);
+  }
 
-  ngOnInit() {
+  ngOnInit() {    
+
+    if(this.idColaborador) {
+      this.tituloHeader = 'Editar Colaborador'
+      this.editando = true;
+      this.rota = '../../colaboradores'
+      this.preencherForm();
+    }
 
     this.formulario.get('equipe')?.valueChanges
       .subscribe((data) => {
@@ -95,6 +109,31 @@ export class FormColaboradorComponent implements OnInit {
       });
   }
 
+  salvarColaborador(): void {
+    this.definirImagemColaborador();  
+    this.verificarSessionStorage();      
+
+    let colaborador;    
+    colaborador = this.formulario.getRawValue();
+    colaborador.id = this.gerarIdColaborador();      
+    this.colaboradores.push(colaborador);
+
+    sessionStorage.setItem('colaboradores', JSON.stringify(this.colaboradores));
+    this.limparForm();
+  }
+
+  editarColaborador(): void {        
+    let colaborador = this.formulario.getRawValue();
+    let colaboradoresSessionStorage = JSON.parse(sessionStorage.getItem('colaboradores') || '')
+    let index = colaboradoresSessionStorage.findIndex((x: Colaborador) => x.id == this.idColaborador);
+  
+    colaboradoresSessionStorage[index] = colaborador;
+    
+    sessionStorage.removeItem('colaboradores');
+    sessionStorage.setItem('colaboradores', JSON.stringify(colaboradoresSessionStorage));            
+    this.router.navigateByUrl(`/home/colaboradores`);
+  }
+
   definirImagemColaborador(): void {
     const sexo = this.formulario.get('sexo')?.value;
     const imagemM = this.imagemM[Math.floor(Math.random() * this.imagemM.length)];
@@ -107,15 +146,15 @@ export class FormColaboradorComponent implements OnInit {
     }
   }
 
-  salvarColaborador(): void {
-    this.definirImagemColaborador();
+  preencherForm(): void {
+    this.colaboradores = JSON.parse(sessionStorage.getItem('colaboradores') || '');     
+    let colaboradorEditar = this.colaboradores.find(x => x.id == this.idColaborador);    
+    this.formulario.setValue(colaboradorEditar);
+    this.cargoSelecionado = colaboradorEditar.cargo;
 
-    let colaborador;    
-    colaborador = this.formulario.getRawValue();
-    this.colaboradores.push(colaborador);
-
-    sessionStorage.setItem('colaboradores', JSON.stringify(this.colaboradores));
-    this.limparForm();
+    if(colaboradorEditar.equipe) {
+      this.campoEquipe = true
+    }      
   }
 
   limparForm(): void {
@@ -123,6 +162,21 @@ export class FormColaboradorComponent implements OnInit {
     this.formulario.get('equipe')?.setValue(false);
     this.formulario.get('nomeEquipe')?.setValue('');        
   }
+  
+  gerarIdColaborador(): string {  
+    return  Math.floor(Math.random() * Date.now()).toString();
+  }
+
+  verificarSessionStorage(): void {        
+    if (sessionStorage.getItem('colaboradores') != null) {
+      let colaboradoresSessionStorage = JSON.parse(sessionStorage.getItem('colaboradores') || '');      
+      this.colaboradores.concat(colaboradoresSessionStorage);
+    }        
+  }
 
   readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
+  
+  readonly celularMascara: MaskitoOptions = {
+    mask: ['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+  };
 }
